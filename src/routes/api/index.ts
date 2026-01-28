@@ -8,9 +8,9 @@ import {
 	BASE_MODEL,
 	TEMPERATURE,
 	TRANSCRIPTION_PROMPT,
-} from "@/lib/constants/config";
-import { ALLOWED_MIME_TYPES } from "@/lib/constants/file";
-import type { ApiError } from "@/lib/types/error";
+} from "../../lib/constants/config";
+import { ALLOWED_MIME_TYPES } from "../../lib/constants/file";
+import type { ApiError } from "../../lib/types/error";
 
 const router = Router();
 

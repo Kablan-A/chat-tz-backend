@@ -4,9 +4,9 @@ import cors, { type CorsOptions } from "cors";
 import cookieParser from "cookie-parser";
 import multer from "multer";
 
-import api from "@/routes/api";
-import { FRONTEND_BASE_URL } from "@/lib/constants/config";
-import { ALLOWED_MIME_TYPES, MAX_FILE_SIZE_BYTES } from "@/lib/constants/file";
+import api from "./routes/api";
+import { FRONTEND_BASE_URL } from "./lib/constants/config";
+import { ALLOWED_MIME_TYPES, MAX_FILE_SIZE_BYTES } from "./lib/constants/file";
 
 const app = express();
 
@@ -42,9 +42,10 @@ app.get("/", (_req, res) => {
 
 app.use("", upload.single("audio"), api);
 
-const port = app.get("port");
-const server = app.listen(port, () =>
-	console.log(`Server started on port ${port}`),
-);
+// Only start server if not in Vercel serverless environment
+if (process.env.VERCEL !== "1") {
+	const port = app.get("port");
+	app.listen(port, () => console.log(`Server started on port ${port}`));
+}
 
-export default server;
+export default app;
